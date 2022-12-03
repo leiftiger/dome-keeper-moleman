@@ -1,0 +1,597 @@
+[gd_scene load_steps=90 format=2]
+
+[ext_resource path="res://content/keeper/hard-light.png" type="Texture" id=1]
+[ext_resource path="res://content/sounds/drops/Metaltest_03.wav" type="AudioStream" id=2]
+[ext_resource path="res://content/sounds/drops/Irontest_02.wav" type="AudioStream" id=3]
+[ext_resource path="res://content/sounds/drops/Irontest_01.wav" type="AudioStream" id=4]
+[ext_resource path="res://content/sounds/drops/Metaltest_01.wav" type="AudioStream" id=5]
+[ext_resource path="res://content/sounds/drops/Irontest_03.wav" type="AudioStream" id=6]
+[ext_resource path="res://systems/audio/Sound.gd" type="Script" id=7]
+[ext_resource path="res://systems/audio/Sound.tscn" type="PackedScene" id=8]
+[ext_resource path="res://content/sounds/drops/waterTest_02.wav" type="AudioStream" id=9]
+[ext_resource path="res://content/sounds/drops/waterTest_01.wav" type="AudioStream" id=10]
+[ext_resource path="res://content/sounds/drops/waterTest_03.wav" type="AudioStream" id=11]
+[ext_resource path="res://content/sounds/drops/Metaltest_02.wav" type="AudioStream" id=12]
+[ext_resource path="res://content/sounds/keeper1/DragResourcesLoop.wav" type="AudioStream" id=13]
+[ext_resource path="res://content/sounds/carryline-break.wav" type="AudioStream" id=14]
+[ext_resource path="res://content/sounds/keeper1/Drop.wav" type="AudioStream" id=15]
+[ext_resource path="res://content/sounds/keeper1/ResourceAttach.wav" type="AudioStream" id=16]
+[ext_resource path="res://content/keeper/keeper1/player1/drill_hit_default.png" type="Texture" id=17]
+[ext_resource path="res://content/keeper/edge_light_material.tres" type="Material" id=18]
+[ext_resource path="res://content/keeper/keeper1/player1/booster.png" type="Texture" id=19]
+[ext_resource path="res://content/sounds/keeper1/Drill/Dig_v3.wav" type="AudioStream" id=20]
+[ext_resource path="res://content/sounds/keeper1/Drill/Dig_Density_03.wav" type="AudioStream" id=21]
+[ext_resource path="res://content/sounds/keeper1/Drill/Dig_Density_01.wav" type="AudioStream" id=22]
+[ext_resource path="res://content/sounds/keeper1/Drill/Dig_Density_05.wav" type="AudioStream" id=23]
+[ext_resource path="res://content/sounds/keeper1/Drill/ChamberTile.wav" type="AudioStream" id=24]
+[ext_resource path="res://content/sounds/keeper1/Drill/Dig_Density_04.wav" type="AudioStream" id=25]
+[ext_resource path="res://content/sounds/drops/Relictest_03.wav" type="AudioStream" id=26]
+[ext_resource path="res://content/sounds/keeper1/Drill/MineIron.wav" type="AudioStream" id=27]
+[ext_resource path="res://content/sounds/keeper1/Drill/Dig_Density_0.wav" type="AudioStream" id=28]
+[ext_resource path="res://content/sounds/keeper1/Drill/MineIron_v2.wav" type="AudioStream" id=29]
+[ext_resource path="res://content/sounds/drops/Relictest_02.wav" type="AudioStream" id=30]
+[ext_resource path="res://content/sounds/drops/Relictest_01.wav" type="AudioStream" id=31]
+[ext_resource path="res://content/sounds/keeper1/Drill/Water.wav" type="AudioStream" id=32]
+[ext_resource path="res://content/sounds/keeper1/jetpackstart2.wav" type="AudioStream" id=33]
+[ext_resource path="res://content/shared/LightLineOfSight.gd" type="Script" id=34]
+[ext_resource path="res://content/keeper/keeper59/Keeper59.gd" type="Script" id=35]
+[ext_resource path="res://content/sounds/keeper1/MovementLoop_01.wav" type="AudioStream" id=36]
+[ext_resource path="res://content/keeper/keeper1/player1/drill_buffed.png" type="Texture" id=37]
+[ext_resource path="res://content/shared/particle_1px_offset.png" type="Texture" id=38]
+[ext_resource path="res://content/keeper/keeper1/spriteframes-skin0.tres" type="SpriteFrames" id=39]
+[ext_resource path="res://content/sounds/Locations/Teleport/TeleportDone_v2.wav" type="AudioStream" id=40]
+[ext_resource path="res://content/sounds/keeper1/Drill/Buff.wav" type="AudioStream" id=41]
+[ext_resource path="res://content/keeper/keeper1/player1/drill.png" type="Texture" id=42]
+[ext_resource path="res://content/sounds/keeper1/CarryLoad.wav" type="AudioStream" id=43]
+[ext_resource path="res://content/sounds/Locations/Teleport/TeleportInit.wav" type="AudioStream" id=44]
+[ext_resource path="res://content/sounds/keeper1/jetpacktest_2.wav" type="AudioStream" id=45]
+[ext_resource path="res://content/sounds/keeper1/jetpackstop.wav" type="AudioStream" id=46]
+[ext_resource path="res://content/keeper/spark_gradient.tres" type="Texture" id=47]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
+[sub_resource type="Curve" id=2]
+max_value = 30.0
+_data = [ Vector2( 0, 0 ), 0.0, -18.0149, 0, 0, Vector2( 0.722411, 3.79601 ), -17.7713, -17.7713, 0, 0, Vector2( 1, 0 ), 9.36998, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0.0863158, 0.250526, 0.477895, 0.762105, 0.905556, 1 )
+colors = PoolColorArray( 0.12549, 0.568627, 0.156863, 1, 0.0627451, 0.247059, 0.156863, 1, 0.0313726, 0.145098, 0.156863, 1, 0, 0.12549, 0.156863, 1, 0, 0.12549, 0.156863, 0.756863, 0, 0.12549, 0.156863, 0 )
+
+[sub_resource type="ParticlesMaterial" id=153]
+emission_shape = 1
+emission_sphere_radius = 1.0
+flag_disable_z = true
+direction = Vector3( 0.5, 1, 0 )
+spread = 20.0
+gravity = Vector3( 0, -50, 0 )
+initial_velocity = 40.0
+initial_velocity_random = 0.8
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 60.0
+color_ramp = ExtResource( 47 )
+
+[sub_resource type="AtlasTexture" id=154]
+atlas = ExtResource( 19 )
+region = Rect2( 0, 0, 5, 5 )
+
+[sub_resource type="AtlasTexture" id=155]
+atlas = ExtResource( 19 )
+region = Rect2( 5, 0, 5, 5 )
+
+[sub_resource type="AtlasTexture" id=159]
+atlas = ExtResource( 19 )
+region = Rect2( 10, 0, 5, 5 )
+
+[sub_resource type="AtlasTexture" id=160]
+atlas = ExtResource( 19 )
+region = Rect2( 15, 0, 5, 5 )
+
+[sub_resource type="SpriteFrames" id=158]
+animations = [ {
+"frames": [ SubResource( 154 ), SubResource( 155 ) ],
+"loop": true,
+"name": "idle",
+"speed": 30.0
+}, {
+"frames": [ SubResource( 159 ), SubResource( 160 ) ],
+"loop": true,
+"name": "boosting",
+"speed": 30.0
+} ]
+
+[sub_resource type="ParticlesMaterial" id=152]
+emission_shape = 1
+emission_sphere_radius = 1.0
+flag_disable_z = true
+direction = Vector3( 0.5, 1, 0 )
+spread = 20.0
+gravity = Vector3( 0, -50, 0 )
+initial_velocity = 40.0
+initial_velocity_random = 0.8
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 60.0
+color_ramp = ExtResource( 47 )
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 22.0227
+
+[sub_resource type="CircleShape2D" id=95]
+radius = 30.0
+
+[sub_resource type="AtlasTexture" id=161]
+atlas = ExtResource( 17 )
+region = Rect2( 0, 0, 13, 13 )
+
+[sub_resource type="AtlasTexture" id=162]
+atlas = ExtResource( 17 )
+region = Rect2( 13, 0, 13, 13 )
+
+[sub_resource type="AtlasTexture" id=163]
+atlas = ExtResource( 17 )
+region = Rect2( 26, 0, 13, 13 )
+
+[sub_resource type="AtlasTexture" id=164]
+atlas = ExtResource( 17 )
+region = Rect2( 39, 0, 13, 13 )
+
+[sub_resource type="SpriteFrames" id=165]
+animations = [ {
+"frames": [ SubResource( 161 ), SubResource( 162 ), SubResource( 163 ), SubResource( 164 ), null ],
+"loop": false,
+"name": "hit",
+"speed": 20.0
+} ]
+
+[sub_resource type="Gradient" id=166]
+offsets = PoolRealArray( 0, 0.606119, 0.848948, 1 )
+colors = PoolColorArray( 0.188235, 0.92549, 0.156863, 1, 0.12549, 0.568627, 0.156863, 1, 0.0313726, 0.145098, 0.156863, 1, 0.0313726, 0.145098, 0.156863, 0 )
+
+[sub_resource type="GradientTexture" id=167]
+gradient = SubResource( 166 )
+width = 128
+
+[sub_resource type="ParticlesMaterial" id=168]
+lifetime_randomness = 0.8
+flag_disable_z = true
+spread = 40.0
+gravity = Vector3( 0, 20, 0 )
+initial_velocity = 60.0
+initial_velocity_random = 0.9
+angular_velocity = 800.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 360.0
+angle_random = 1.0
+color_ramp = SubResource( 167 )
+
+[sub_resource type="AtlasTexture" id=111]
+atlas = ExtResource( 42 )
+region = Rect2( 0, 0, 10, 20 )
+
+[sub_resource type="AtlasTexture" id=112]
+atlas = ExtResource( 42 )
+region = Rect2( 10, 0, 10, 20 )
+
+[sub_resource type="AtlasTexture" id=113]
+atlas = ExtResource( 42 )
+region = Rect2( 20, 0, 10, 20 )
+
+[sub_resource type="AtlasTexture" id=114]
+atlas = ExtResource( 42 )
+region = Rect2( 30, 0, 10, 20 )
+
+[sub_resource type="AtlasTexture" id=115]
+atlas = ExtResource( 42 )
+region = Rect2( 40, 0, 10, 20 )
+
+[sub_resource type="AtlasTexture" id=116]
+atlas = ExtResource( 42 )
+region = Rect2( 50, 0, 10, 20 )
+
+[sub_resource type="AtlasTexture" id=117]
+atlas = ExtResource( 42 )
+region = Rect2( 60, 0, 10, 20 )
+
+[sub_resource type="AtlasTexture" id=118]
+atlas = ExtResource( 42 )
+region = Rect2( 70, 0, 10, 20 )
+
+[sub_resource type="AtlasTexture" id=203]
+atlas = ExtResource( 37 )
+region = Rect2( 0, 0, 10, 20 )
+
+[sub_resource type="AtlasTexture" id=204]
+atlas = ExtResource( 37 )
+region = Rect2( 10, 0, 10, 20 )
+
+[sub_resource type="AtlasTexture" id=205]
+atlas = ExtResource( 37 )
+region = Rect2( 20, 0, 10, 20 )
+
+[sub_resource type="AtlasTexture" id=206]
+atlas = ExtResource( 37 )
+region = Rect2( 30, 0, 10, 20 )
+
+[sub_resource type="AtlasTexture" id=207]
+atlas = ExtResource( 37 )
+region = Rect2( 40, 0, 10, 20 )
+
+[sub_resource type="AtlasTexture" id=208]
+atlas = ExtResource( 37 )
+region = Rect2( 50, 0, 10, 20 )
+
+[sub_resource type="AtlasTexture" id=209]
+atlas = ExtResource( 37 )
+region = Rect2( 60, 0, 10, 20 )
+
+[sub_resource type="AtlasTexture" id=210]
+atlas = ExtResource( 37 )
+region = Rect2( 70, 0, 10, 20 )
+
+[sub_resource type="SpriteFrames" id=18]
+animations = [ {
+"frames": [ SubResource( 111 ), SubResource( 112 ), SubResource( 113 ), SubResource( 114 ), SubResource( 115 ), SubResource( 116 ), SubResource( 117 ), SubResource( 118 ) ],
+"loop": false,
+"name": "drill",
+"speed": 20.0
+}, {
+"frames": [ SubResource( 203 ), SubResource( 204 ), SubResource( 205 ), SubResource( 206 ), SubResource( 207 ), SubResource( 208 ), SubResource( 209 ), SubResource( 210 ) ],
+"loop": false,
+"name": "drill_buffed",
+"speed": 20.0
+} ]
+
+[sub_resource type="CircleShape2D" id=170]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id=211]
+radius = 3.0
+
+[sub_resource type="AudioStreamRandomPitch" id=93]
+audio_stream = ExtResource( 28 )
+
+[sub_resource type="AudioStreamRandomPitch" id=96]
+audio_stream = ExtResource( 21 )
+
+[sub_resource type="AudioStreamRandomPitch" id=98]
+audio_stream = ExtResource( 29 )
+random_pitch = 1.67
+
+[node name="Keeper" type="KinematicBody2D" groups=["lostL", "pauseL", "player"]]
+z_index = 25
+collision_layer = 16384
+collision_mask = 2147483649
+script = ExtResource( 35 )
+techId = "keeper59"
+
+[node name="DrillHitTestRay" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 10, 0 )
+
+[node name="Trail" type="CPUParticles2D" parent="."]
+material = SubResource( 1 )
+position = Vector2( 0, 1 )
+emitting = false
+amount = 30
+lifetime = 3.0
+lifetime_randomness = 0.5
+local_coords = false
+emission_shape = 1
+emission_sphere_radius = 4.0
+direction = Vector2( 0, -1 )
+spread = 15.0
+gravity = Vector2( 0, -2 )
+initial_velocity = 6.0
+initial_velocity_random = 0.4
+damping_curve = SubResource( 2 )
+color_ramp = SubResource( 3 )
+
+[node name="ThrusterLeft" type="Particles2D" parent="."]
+position = Vector2( -3.5, -2 )
+emitting = false
+amount = 4
+lifetime = 0.2
+explosiveness = 0.23
+local_coords = false
+process_material = SubResource( 153 )
+
+[node name="Booster" type="AnimatedSprite" parent="ThrusterLeft"]
+frames = SubResource( 158 )
+animation = "idle"
+
+[node name="ThrusterRight" type="Particles2D" parent="."]
+position = Vector2( 4.5, -2 )
+emitting = false
+amount = 4
+lifetime = 0.2
+explosiveness = 0.23
+local_coords = false
+process_material = SubResource( 152 )
+
+[node name="Booster" type="AnimatedSprite" parent="ThrusterRight"]
+frames = SubResource( 158 )
+animation = "idle"
+
+[node name="UseArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UseArea"]
+shape = SubResource( 4 )
+
+[node name="CarryArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CarryArea"]
+shape = SubResource( 95 )
+
+[node name="Light" type="Node2D" parent="."]
+position = Vector2( 0, -2 )
+
+[node name="Tween" type="Tween" parent="Light"]
+
+[node name="EdgeLight" type="Sprite" parent="Light"]
+material = ExtResource( 18 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 1 )
+
+[node name="LightBig" type="Node2D" parent="Light"]
+script = ExtResource( 34 )
+light_name = "keeper_big"
+light_color = Color( 1, 0.615686, 0.372549, 0.592157 )
+light_size = 36.0
+light_flicker_strength = 1.0
+
+[node name="LightSmall" type="Node2D" parent="Light"]
+script = ExtResource( 34 )
+light_name = "keeper_small"
+light_color = Color( 1, 0.615686, 0.372549, 1 )
+light_size = 28.0
+light_flicker_strength = 1.0
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+light_mask = 0
+position = Vector2( 0.5, 0 )
+frames = ExtResource( 39 )
+
+[node name="DrillHit" type="AnimatedSprite" parent="."]
+position = Vector2( -13, -1 )
+z_index = 4
+frames = SubResource( 165 )
+animation = "hit"
+centered = false
+offset = Vector2( -4, -6 )
+
+[node name="DrillHitParticles" type="Particles2D" parent="DrillHit"]
+emitting = false
+amount = 15
+lifetime = 0.8
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.95
+local_coords = false
+process_material = SubResource( 168 )
+texture = ExtResource( 38 )
+
+[node name="DrillSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 18 )
+animation = "drill_buffed"
+offset = Vector2( -8, -1 )
+
+[node name="PlayerCollision" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 170 )
+
+[node name="PlayerCollision2" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, -4 )
+shape = SubResource( 211 )
+
+[node name="PlayerCollision3" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, 4 )
+shape = SubResource( 211 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="TileHitHardness0" type="AudioStreamPlayer" parent="."]
+stream = SubResource( 93 )
+volume_db = -9.286
+pitch_scale = 0.9
+bus = "Sounds"
+
+[node name="TileHitHardness1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 22 )
+volume_db = -10.524
+pitch_scale = 0.88
+bus = "Sounds"
+
+[node name="TileHitHardness2" type="AudioStreamPlayer" parent="."]
+stream = SubResource( 96 )
+volume_db = -10.524
+pitch_scale = 0.7
+bus = "Sounds"
+
+[node name="TileHitHardness3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 25 )
+volume_db = -9.905
+pitch_scale = 0.72
+bus = "Sounds"
+
+[node name="TileHitHardness4" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 23 )
+volume_db = -9.905
+pitch_scale = 0.75
+bus = "Sounds"
+
+[node name="TileHitSand" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 27 )
+volume_db = -17.612
+pitch_scale = 0.6
+bus = "Sounds"
+script = ExtResource( 7 )
+
+[node name="TileHitIron2" type="AudioStreamPlayer" parent="TileHitSand"]
+volume_db = -7.778
+pitch_scale = 1.43
+bus = "NoMusic"
+script = ExtResource( 7 )
+streams = [ ExtResource( 5 ), ExtResource( 12 ), ExtResource( 2 ) ]
+
+[node name="TileHitPitch" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 20 )
+volume_db = -7.399
+bus = "Sounds"
+
+[node name="TileHitIron" type="AudioStreamPlayer" parent="."]
+stream = SubResource( 98 )
+volume_db = -14.681
+pitch_scale = 0.93
+bus = "Sounds"
+script = ExtResource( 7 )
+
+[node name="TileHitIron3" type="AudioStreamPlayer" parent="TileHitIron"]
+volume_db = -7.664
+pitch_scale = 1.02
+bus = "NoMusic"
+script = ExtResource( 7 )
+streams = [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 6 ) ]
+
+[node name="TileHitWater" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 32 )
+volume_db = -12.205
+pitch_scale = 0.92
+bus = "Sounds"
+script = ExtResource( 7 )
+
+[node name="TileHitIron3" type="AudioStreamPlayer" parent="TileHitWater"]
+volume_db = -9.158
+pitch_scale = 1.66
+bus = "NoMusic"
+script = ExtResource( 7 )
+streams = [ ExtResource( 10 ), ExtResource( 9 ), ExtResource( 11 ) ]
+
+[node name="TileHitBuffed" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 41 )
+volume_db = -0.362
+bus = "Sounds"
+
+[node name="TileHitGadget" parent="." instance=ExtResource( 8 )]
+stream = ExtResource( 24 )
+volume_db = -12.0
+pitch_scale = 1.24
+bus = "Keeper"
+randomPitch = 0.03
+
+[node name="TileHitIron4" type="AudioStreamPlayer" parent="TileHitGadget"]
+volume_db = 2.0
+pitch_scale = 1.02
+bus = "Keeper"
+script = ExtResource( 7 )
+streams = [ ExtResource( 31 ), ExtResource( 30 ), ExtResource( 26 ) ]
+
+[node name="TileHitRelic" parent="." instance=ExtResource( 8 )]
+stream = ExtResource( 24 )
+volume_db = -10.0
+pitch_scale = 1.44
+bus = "Keeper"
+
+[node name="Pickup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+bus = "Sounds"
+
+[node name="Drop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
+volume_db = -6.891
+pitch_scale = 1.74
+bus = "Sounds"
+
+[node name="CarryLine" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+volume_db = -8.739
+bus = "NoMusic"
+
+[node name="CarryLineStretch" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+bus = "NoMusic"
+
+[node name="CarryLineBreak" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+bus = "Sounds"
+
+[node name="TeleportInit" parent="." instance=ExtResource( 8 )]
+stream = ExtResource( 44 )
+pitch_scale = 0.91
+bus = "Keeper"
+randomVolume = 0.0
+randomPitch = 0.0
+
+[node name="TeleportDone" parent="." instance=ExtResource( 8 )]
+stream = ExtResource( 40 )
+volume_db = 3.714
+bus = "Keeper"
+randomVolume = 0.0
+randomPitch = 0.0
+
+[node name="MoveStartSound" parent="." instance=ExtResource( 8 )]
+stream = ExtResource( 33 )
+volume_db = -80.0
+pitch_scale = 1.5
+bus = "Keeper"
+randomVolume = 0.0
+randomPitch = 0.0
+
+[node name="MoveStopSound" parent="." instance=ExtResource( 8 )]
+stream = ExtResource( 46 )
+volume_db = -80.0
+pitch_scale = 1.81
+bus = "Keeper"
+randomVolume = 0.0
+randomPitch = 0.0
+
+[node name="MoveSound" parent="." instance=ExtResource( 8 )]
+stream = ExtResource( 45 )
+volume_db = -12.0
+pitch_scale = 1.08
+bus = "Keeper"
+randomVolume = 0.0
+randomPitch = 0.0
+fadeInTime = 0.1
+fadeOutTime = 0.1
+loop = true
+
+[node name="StillSound" parent="." instance=ExtResource( 8 )]
+stream = ExtResource( 36 )
+volume_db = -15.603
+pitch_scale = 0.98
+mix_target = 2
+bus = "Keeper"
+randomVolume = 1.2
+randomPitch = 0.04
+fadeInTime = 0.1
+fadeOutTime = 0.1
+loop = true
+
+[node name="CarryLoadSound" parent="." instance=ExtResource( 8 )]
+stream = ExtResource( 43 )
+volume_db = 1.418
+pitch_scale = 0.86
+bus = "Keeper"
+randomVolume = 0.0
+randomPitch = 0.0
+fadeInTime = 0.1
+fadeOutTime = 0.1
+loop = true
+
+[connection signal="area_entered" from="UseArea" to="." method="_on_UseArea_usable_entered"]
+[connection signal="area_exited" from="UseArea" to="." method="_on_UseArea_usable_exited"]
+[connection signal="body_entered" from="UseArea" to="." method="_on_UseArea_usable_entered"]
+[connection signal="body_exited" from="UseArea" to="." method="_on_UseArea_usable_exited"]
+[connection signal="body_entered" from="CarryArea" to="." method="_on_CarryArea_body_entered"]
+[connection signal="body_exited" from="CarryArea" to="." method="_on_CarryArea_body_exited"]

@@ -1,0 +1,66 @@
+keeper59.title	Moleman
+keeper59.desc	Digs tunnels in preparation for his vengeance
+upgrades.keeper59.title	Moleman
+upgrades.keeper59.desc	"A strange creature that balances throughput and speed."
+upgrades.keeper59movespeed1.title	Move speed
+upgrades.keeper59movespeed1.desc	Increases your speed when moving outside of tunnels.
+upgrades.keeper59tunnellength1.title	Tunnel length 1
+upgrades.keeper59tunnellength1.desc	"Increases the max length of your tunnels.
+
+Hold the dig button to increase tunnel length before releasing the tunneler."
+upgrades.keeper59tunnellength2.title	Tunnel length 2
+upgrades.keeper59tunnellength2.desc	"Increases the max length of your tunnels."
+upgrades.keeper59tunnellength3.title	Tunnel length 3
+upgrades.keeper59tunnellength3.desc	"Increases the max length of your tunnels."
+upgrades.keeper59tunnellength4.title	Tunnel length 4
+upgrades.keeper59tunnellength4.desc	"Increases the max length of your tunnels.
+
+(this is maybe overpowered)"
+upgrades.keeper59tunnelerstrength1.title	Tunneller strength 1
+upgrades.keeper59tunnelerstrength1.desc	Makes the tunneler dig faster and increases damage caused by you when travelling in tunnels.
+upgrades.keeper59tunnelerstrength2.title	Tunneller strength 2
+upgrades.keeper59tunnelerstrength2.desc	Makes the tunneler dig faster and increases damage caused by you when travelling in tunnels.
+upgrades.keeper59tunnelerstrength3.title	Tunneller strength 3
+upgrades.keeper59tunnelerstrength3.desc	Makes the tunneler dig faster and increases damage caused by you when travelling in tunnels.
+upgrades.keeper59carrystrength1.title	Carry strength 1
+upgrades.keeper59carrystrength1.desc	Increases your carrying strength.
+upgrades.keeper59carrystrength2.title	Carry strength 2
+upgrades.keeper59carrystrength2.desc	Increases your carrying strength.
+upgrades.keeper59carrystrength3.title	Carry strength 3
+upgrades.keeper59carrystrength3.desc	Increases your carrying strength.
+upgrades.keeper59carrystrength4.title	Carry strength 4
+upgrades.keeper59carrystrength4.desc	Increases your carrying strength.
+upgrades.keeper59queuedtunnelers.title	Queued tunnelers
+upgrades.keeper59queuedtunnelers.desc	While a tunneler is digging, you can fire another tunneler to continue from where it finishes.
+upgrades.keeper59queuedsplittunnelers.title	Split queued tunnelers
+upgrades.keeper59queuedsplittunnelers.desc	The queued tunnelers will split and shoot off to the sides of the first tunnel.
+upgrades.keeper59queuedsplittunnelerssquared.title	Second queued tunnelers
+upgrades.keeper59queuedsplittunnelerssquared.desc	"Queue even more tunnelers after the initial split.
+
+They will be half the length of the first split."
+upgrades.keeper59mineralextraction.title	Mineral extraction
+upgrades.keeper59mineralextraction.desc	While digging a tunnel through resources, they are spit out of the tunnel.
+upgrades.keeper59tunnelvacuum.title	Tunnel vacuum
+upgrades.keeper59tunnelvacuum.desc	"Tunnels will hoover up resources close to them.
+
+Press the dig button to reverse direction when inside a tunnel."
+upgrades.keeper59tunnelinvulnerability.title	Tunnel invulnerability
+upgrades.keeper59tunnelinvulnerability.desc	Tunnels no longer take damage when you travel through them.
+upgrades.keeper59tunnelspeed1.title	Tunnel move speed 1
+upgrades.keeper59tunnelspeed1.desc	You move even faster when travelling in tunnels.
+upgrades.keeper59tunnelspeed2.title	Tunnel move speed 2
+upgrades.keeper59tunnelspeed2.desc	You move much faster when travelling in tunnels.
+upgrades.keeper59tunneldetonation.title	Tunnel detonation
+upgrades.keeper59tunneldetonation.desc	"Detonate finished tunnels using the same button you drop resources with.
+
+Will probably be removed since it's super OP..."
+properties.keeper59.maxspeed	Top Speed {}
+properties.keeper59.speedlosspercarry	Carry Slowdown {}
+properties.keeper59.maxtunnelers	Max simultaneous tunnelers {}
+properties.keeper59.tunnelertargetdamage	Tunneler target damage {}
+properties.keeper59.tunnelertraveldamage	Tunneler travel damage {}
+properties.keeper59.tunnelminlength	Min tunnel length {}
+properties.keeper59.tunnelmaxlength	Max tunnel length {}
+properties.keeper59.tunnelkeepertravelspeed	Tunnel move speed {}
+properties.keeper59.tunnelkeepertraveldamage	Tunnel move damage {}
+properties.keeper59.tunnelkeepertraveldamagereduction	Reduce tunnel move damage by {.percent}

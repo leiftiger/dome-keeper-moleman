@@ -1,0 +1,46 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://content/keeper/keeper59/tunneler/TunnelerDrone.gd" type="Script" id=1]
+[ext_resource path="res://content/keeper/keeper59/tunneler/tunneler_drone.png" type="Texture" id=2]
+[ext_resource path="res://systems/audio/Sound.tscn" type="PackedScene" id=3]
+[ext_resource path="res://content/sounds/Locations/Drillbot/DigDrillbot.wav" type="AudioStream" id=4]
+[ext_resource path="res://content/sounds/Bastards/crunch_01.wav" type="AudioStream" id=5]
+[ext_resource path="res://content/sounds/Bastards/crunch_04.wav" type="AudioStream" id=6]
+[ext_resource path="res://content/sounds/Bastards/crunch_03.wav" type="AudioStream" id=7]
+[ext_resource path="res://content/sounds/Bastards/crunch_02.wav" type="AudioStream" id=8]
+
+[node name="TunnelerDrone" type="Node2D"]
+scale = Vector2( 0.5, 0.5 )
+z_index = 24
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+texture = ExtResource( 2 )
+
+[node name="TunnelDrillSound" parent="." instance=ExtResource( 3 )]
+stream = ExtResource( 4 )
+volume_db = -5.185
+pitch_scale = 10.0
+bus = "Mine"
+randomPitch = 0.8
+maxAudibleDistance = 240.0
+minAudibleDistance = 50.0
+
+[node name="ExcavationSound" parent="." instance=ExtResource( 3 )]
+stream = ExtResource( 4 )
+volume_db = -3.0
+pitch_scale = 2.71
+bus = "Mine"
+randomPitch = 0.8
+maxAudibleDistance = 240.0
+minAudibleDistance = 50.0
+
+[node name="DrillSound5" parent="ExcavationSound" instance=ExtResource( 3 )]
+volume_db = 5.739
+pitch_scale = 1.36
+bus = "Mine"
+randomPitch = 0.16
+maxAudibleDistance = 150.0
+minAudibleDistance = 50.0
+streams = [ ExtResource( 5 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 6 ) ]
