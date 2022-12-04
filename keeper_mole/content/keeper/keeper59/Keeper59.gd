@@ -455,7 +455,7 @@ func allowTunneling(startCoord, targetCoord):
 	var pathClear = true
 
 	# Nip diagonal paths in the bud if they get past our defenses
-	if (targetCoord.x - startCoord.x) > 0.01 and (targetCoord.y - startCoord.y) > 0.01:
+	if abs(targetCoord.x - startCoord.x) > 0.01 and abs(targetCoord.y - startCoord.y) > 0.01:
 		return false
 
 	var dir = normalizeIntVector(targetCoord - startCoord)
