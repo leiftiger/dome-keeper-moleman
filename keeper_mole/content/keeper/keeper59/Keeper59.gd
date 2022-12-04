@@ -22,6 +22,7 @@ var lastTileDir:Vector2
 var lastTile:Node2D
 var tileTunnelers := {}
 var tunnelMarkerInstances := []
+var hasUpdatedTunnelMarkers := false
 var curTunnelerCooldown := 0.0
 
 var carryLines: = {}
@@ -413,6 +414,8 @@ func updateTunnelerTargets(delta):
 		else:
 			setTunnelTargetMarker(0, lastTile.global_position, lastTileDir, int(curTunnelDistance - 1))
 
+		hasUpdatedTunnelMarkers = true
+
 	else:
 		curTunnelDistance = Data.of("keeper59.tunnelMinLength")
 
@@ -483,6 +486,10 @@ func pickupHold():
 func allowTunneling(startCoord, targetCoord):
 	var pathClear = true
 
+	# Nip diagonal paths in the bud if they get past our defenses
+	if (targetCoord.x - startCoord.x) > 0.01 and (targetCoord.y - startCoord.y) > 0.01:
+		return false
+
 	var dir = normalizeIntVector(targetCoord - startCoord)
 
 	for i in range(0, int((targetCoord - startCoord).length())):
@@ -514,7 +521,7 @@ func getMaxQueuedTunnelers():
 func pickupHoldStopped():
 	pickupType = ""
 	
-	if isTunneling and is_instance_valid(lastTile):
+	if isTunneling and is_instance_valid(lastTile) and hasUpdatedTunnelMarkers:
 		curTunnelerCooldown = Data.of("keeper59.tunnelerCooldownTime")
 
 		if tileTunnelers.has(lastTile.get_instance_id()):
@@ -584,6 +591,7 @@ func pickupHoldStopped():
 
 	lastTile = null
 	isTunneling = false
+	hasUpdatedTunnelMarkers = false
 
 func dropHit():
 
