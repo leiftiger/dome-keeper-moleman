@@ -24,7 +24,40 @@ func beforeReady():
 	Style.init(find_node("Menu"))
 	Style.init($CanvasLayer / ChoicePopup)
 
+func hackyMolemanLoading():
+
+	# Force upgrades.yaml to be re-read when playing with the moleman
+	# TODO: A less hacky way of achieving this
+	if not Data.ofOr("keeper59.maxSpeed", false):
+		Data.gameProperties = {}
+		Data.upgrades = {}
+		Data.gadgets = {}
+		Data.orderedUpgradeKeys = []
+
+		Data.templates = {}
+		Data._ready()
+
+	var fs = File.new()
+	var err = fs.open("res://content/keeper/keeper59/locale/" + TranslationServer.get_locale() + ".csv", File.READ)
+	if err != OK:
+		err = fs.open("res://content/keeper/keeper59/locale/en_US.csv", File.READ)
+
+		if err != OK:
+			return
+
+	var translations = Translation.new()
+
+	while not fs.eof_reached():
+		var cols = fs.get_csv_line("\t")
+
+		if cols.size() >= 2:
+			translations.add_message(cols[0], cols[1])
+
+	TranslationServer.add_translation(translations)
+
 func beforeStart():
+	hackyMolemanLoading()
+
 	Data.applyInitial("laser")
 	Data.applyInitial("sword")
 	Data.apply("laser.variant", 2)
