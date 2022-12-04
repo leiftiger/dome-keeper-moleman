@@ -43,7 +43,7 @@ upgrades.keeper59mineralextraction.desc	While digging a tunnel through resources
 upgrades.keeper59tunnelvacuum.title	Tunnel vacuum
 upgrades.keeper59tunnelvacuum.desc	"Tunnels will hoover up resources close to them.
 
-Press the dig button to reverse direction when inside a tunnel."
+Press and hold the drop button before touching a tunnel to reverse vacuum direction."
 upgrades.keeper59tunnelreducedfriction.title	Reduced friction
 upgrades.keeper59tunnelreducedfriction.desc	"Tunnels receive normal damage when you quickly travel back and forth through them.
 

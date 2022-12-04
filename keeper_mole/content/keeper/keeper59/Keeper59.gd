@@ -17,6 +17,8 @@ const maxCarryLineLength: = 150.0
 
 var inTunnel := false
 var isTunneling := false
+var isChangingVacuum := false
+var hasChangedVacuum := false
 var curTunnelDistance := 0.0
 var lastTileDir:Vector2
 var lastTile:Node2D
@@ -145,6 +147,8 @@ func _physics_process(delta):
 
 	if moveDirectionInput.length() > 0.0:
 		touchTunnelTile()
+	else:
+		hasChangedVacuum = false
 	
 	updateCarry()
 	
@@ -423,43 +427,7 @@ func updateTunnelerTargets(delta):
 			tunnelMarker.hide()
 
 func pickupHit():
-	# When in tunnel, reverse vacuum direction
-	if inTunnel:
-
-		if Data.ofOr("keeper59.tunnelVacuum", false):
-			var tunnelCoord = Level.map.getTileCoord(global_position)
-
-			var tunnelTile = Level.map.getTile(tunnelCoord)
-
-			# Shouldn't be possible
-			if not is_instance_valid(tunnelTile) or not tunnelTile.has_meta("tunnel"):
-				return false
-
-			var tunnel = tunnelTile.get_meta("tunnel")
-
-			tunnel.reverseVacuumDirection()
-
-			for i in range(1, Data.of("keeper59.tunnelMaxLength")):
-
-				tunnelTile = Level.map.getTile(tunnelCoord + (tunnel.tunnelDir() * i))
-
-				if not is_instance_valid(tunnelTile) or not tunnelTile.has_meta("tunnel"):
-					break
-
-				tunnelTile.get_meta("tunnel").reverseVacuumDirection()
-
-			for i in range(1, Data.of("keeper59.tunnelMaxLength")):
-
-				tunnelTile = Level.map.getTile(tunnelCoord - (tunnel.tunnelDir() * i))
-
-				if not is_instance_valid(tunnelTile) or not tunnelTile.has_meta("tunnel"):
-					break
-
-				tunnelTile.get_meta("tunnel").reverseVacuumDirection()
-
-		return false
-
-	if Data.of("keeper.insidestation") or disabled:
+	if Data.of("keeper.insidestation") or disabled or inTunnel:
 		return false
 	
 	if focussedCarryable:
@@ -633,6 +601,15 @@ func dropHold():
 		var drop = carriedCarryables.front()
 		dropCarry(drop)
 
+	isChangingVacuum = true
+
+func dropHoldStopped():
+
+	if Data.of("keeper.insidestation") or disabled:
+		return
+
+	isChangingVacuum = false
+
 func pickup(drop):
 	attachCarry(drop)
 
@@ -657,9 +634,15 @@ func touchTunnelTile()->void:
 		var tunnel = tile.get_meta("tunnel")
 		
 		if tunnel.canEnterTunnel(self):
-			lastTile = null
-			isTunneling = false
-			tunnel.enterTunnel(self)
+
+			if isChangingVacuum and Data.ofOr("keeper59.tunnelVacuum", false):
+				if not hasChangedVacuum:
+					hasChangedVacuum = true
+					tunnel.reverseVacuumDirection()
+			else:
+				lastTile = null
+				isTunneling = false
+				tunnel.enterTunnel(self)
 
 			return
 

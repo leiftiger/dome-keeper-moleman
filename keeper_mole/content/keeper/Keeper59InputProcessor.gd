@@ -79,3 +79,6 @@ func keeperKeyEvent(event, handled:bool):
 			if not handled and not dropHold and not GameWorld.paused:
 				keeper.dropHit()
 				dropKeyDownTime = 0.0
+
+		if dropHold:
+			keeper.dropHoldStopped()
