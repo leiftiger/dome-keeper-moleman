@@ -1,7 +1,7 @@
 keeper59.title	Moleman
 keeper59.desc	Digs tunnels in preparation for his vengeance
 upgrades.keeper59.title	Moleman
-upgrades.keeper59.desc	"A strange creature that balances throughput and speed."
+upgrades.keeper59.desc	A strange creature that balances throughput and speed.
 upgrades.keeper59movespeed1.title	Move speed
 upgrades.keeper59movespeed1.desc	Increases your speed when moving outside of tunnels.
 upgrades.keeper59tunnellength1.title	Tunnel length 1
@@ -9,9 +9,9 @@ upgrades.keeper59tunnellength1.desc	"Increases the max length of your tunnels.
 
 Hold the dig button to increase tunnel length before releasing the tunneler."
 upgrades.keeper59tunnellength2.title	Tunnel length 2
-upgrades.keeper59tunnellength2.desc	"Increases the max length of your tunnels."
+upgrades.keeper59tunnellength2.desc	Increases the max length of your tunnels.
 upgrades.keeper59tunnellength3.title	Tunnel length 3
-upgrades.keeper59tunnellength3.desc	"Increases the max length of your tunnels."
+upgrades.keeper59tunnellength3.desc	Increases the max length of your tunnels.
 upgrades.keeper59tunnellength4.title	Tunnel length 4
 upgrades.keeper59tunnellength4.desc	"Increases the max length of your tunnels.
 
@@ -44,8 +44,10 @@ upgrades.keeper59tunnelvacuum.title	Tunnel vacuum
 upgrades.keeper59tunnelvacuum.desc	"Tunnels will hoover up resources close to them.
 
 Press the dig button to reverse direction when inside a tunnel."
-upgrades.keeper59tunnelinvulnerability.title	Tunnel invulnerability
-upgrades.keeper59tunnelinvulnerability.desc	Tunnels no longer take damage when you travel through them.
+upgrades.keeper59tunnelreducedfriction.title	Reduced friction
+upgrades.keeper59tunnelreducedfriction.desc	"Tunnels receive normal damage when you quickly travel back and forth through them.
+
+Otherwise, tunnels will last longer if seldomly used."
 upgrades.keeper59tunnelspeed1.title	Tunnel move speed 1
 upgrades.keeper59tunnelspeed1.desc	You move even faster when travelling in tunnels.
 upgrades.keeper59tunnelspeed2.title	Tunnel move speed 2

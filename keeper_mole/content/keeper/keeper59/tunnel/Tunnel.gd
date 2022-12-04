@@ -1,6 +1,7 @@
 extends Node2D
 
 var open = false
+var friction := 0.0
 var travellers = []
 var travellersInTunnel = {}
 
@@ -301,6 +302,11 @@ func _physics_process(delta):
 
 	var tileCoord = Level.map.getTileCoord(global_position)
 
+	friction -= Data.of("keeper59.tunnelFrictionLossPerSec") * delta
+
+	if friction < Data.of("keeper59.tunnelMinFriction"):
+		friction = Data.of("keeper59.tunnelMinFriction")
+
 	for i in range(0, travellers.size()):
 
 		var data = travellers[i]
@@ -362,6 +368,15 @@ func _physics_process(delta):
 					traveller.apply_central_impulse(travellerDir * travellerSpeed)
 
 			travellersToRemove.push_front(i)
+
+			if data["keeper"]:
+				travellerDamage *= friction
+
+				# Friction increase is done afterwards so that we always begin from the minimum
+				friction += Data.of("keeper59.tunnelKeeperTravelFriction")
+
+				if friction > Data.of("keeper59.tunnelMaxFriction"):
+					friction = Data.of("keeper59.tunnelMaxFriction")
 
 			if travellerDamage > 0.01:
 				$TunnelDrillSound.play()

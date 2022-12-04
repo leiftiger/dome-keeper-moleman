@@ -539,9 +539,13 @@ keeper59:
     - keeper59.tunnelMinLength = 2
     - keeper59.tunnelMaxLength = 2
     - keeper59.tunnelLengthSpeed = 2.0
+    - keeper59.tunnelMinFriction = 1.0
+    - keeper59.tunnelMaxFriction = 1.0
+    - keeper59.tunnelFrictionLossPerSec = 0.1/h
     - keeper59.tunnelKeeperTravelSpeed = 150.0
     - keeper59.tunnelKeeperTravelDamage = 1.0
     - keeper59.tunnelKeeperTravelDamageReduction = 0.0/h
+    - keeper59.tunnelKeeperTravelFriction = 1.0/h
     - keeper59.tunnelKeeperTravelCenteringSpeed = 2.0
     - keeper59.tunnelObjectTravelSpeed = 100.0
     - keeper59.tunnelObjectTravelDamage = 0.0
@@ -650,17 +654,18 @@ keeper59MineralExtraction:
     - keeper59.tunnelMining = true
   predecessors: [keeper59]
   locks: [keeper59QueuedTunnelers]
-keeper59TunnelInvulnerability:
+keeper59TunnelReducedFriction:
   cost: iron=10
   propertyChanges:
-    - keeper59.tunnelKeeperTravelDamageReduction = 1.0
-    - keeper59.tunnelObjectTravelDamageReduction = 1.0
+    - keeper59.tunnelMinFriction = 0.1
+    - keeper59.tunnelKeeperTravelFriction = 0.4
+    - keeper59.tunnelObjectTravelDamageReduction = 0.95
   predecessors: [keeper59MineralExtraction]
 keeper59TunnelVacuum:
   cost: iron=15, sand=2
   propertyChanges:
     - keeper59.tunnelVacuum = true
-  predecessors: [keeper59TunnelInvulnerability]
+  predecessors: [keeper59TunnelReducedFriction]
 keeper59TunnelSpeed1:
   cost: iron=5
   propertyChanges:
