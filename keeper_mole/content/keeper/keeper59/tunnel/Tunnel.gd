@@ -71,6 +71,9 @@ func tileDestroyed(tileCoord):
 						traveller.mode = data["physicsMode"]
 					traveller.popPhysicsOverride()
 
+				traveller.collision_layer = data["collision_layer"]
+				traveller.collision_mask = data["collision_mask"]
+
 		travellers.clear()
 
 		var tile = Level.map.getTile(thisTileCoord)
@@ -143,13 +146,24 @@ func enterTunnel(traveller, dir = null):
 		"reverse": dir.dot(Vector2(cos(global_rotation), sin(global_rotation))) < 0,
 		"traveller": traveller,
 		"physicsMode": traveller.mode if "mode" in traveller else null,
+		"collision_layer": traveller.collision_layer,
+		"collision_mask": traveller.collision_mask,
 		"entered": false,
 		"keeper": (traveller is Keeper),
 	}
 
+	# Disable all collisions to prevent resources from
+	# being carried until they've been released from the tunnel
+	traveller.collision_layer = 0
+	traveller.collision_mask = 0
+	traveller.set_collision_layer_bit(CONST.LAYER_BACK_LAYER_COLLISIONS, true)
+	traveller.set_collision_mask_bit(CONST.LAYER_BACK_LAYER_COLLISIONS, true)
+
 	if traveller is Keeper:
 		traveller.setTunnelMode(true)
 	else:
+		# We use a physics override and change the physics mode
+		# to prevent issues when the game is paused
 		var po = CarryablePhysicsOverride.new()
 		po.linear_damp = 1000
 		po.angular_damp = 1000
@@ -162,7 +176,7 @@ func enterTunnel(traveller, dir = null):
 
 	travellers.append(travellerData)
 
-func continueTunneling(traveller, fromCoord, physicsMode = RigidBody2D.MODE_RIGID):
+func continueTunneling(traveller, fromCoord, prevData):
 
 	var tileCoord = Level.map.getTileCoord(global_position)
 
@@ -173,7 +187,9 @@ func continueTunneling(traveller, fromCoord, physicsMode = RigidBody2D.MODE_RIGI
 	var travellerData = {
 		"reverse": dir.dot(Vector2(cos(global_rotation), sin(global_rotation))) < 0,
 		"traveller": traveller,
-		"physicsMode": physicsMode,
+		"physicsMode": prevData["physicsMode"],
+		"collision_layer": prevData["collision_layer"],
+		"collision_mask": prevData["collision_mask"],
 		"entered": true,
 		"keeper": (traveller is Keeper),
 	}
@@ -354,7 +370,8 @@ func _physics_process(delta):
 
 			if is_instance_valid(otherTile) and otherTile.has_meta("tunnel"):
 				travellersInTunnel.erase(traveller.get_instance_id())
-				otherTile.get_meta("tunnel").continueTunneling(traveller, tileCoord, data["physicsMode"])
+
+				otherTile.get_meta("tunnel").continueTunneling(traveller, tileCoord, data)
 			else:
 				travellersInTunnel.erase(traveller.get_instance_id())
 
@@ -366,6 +383,9 @@ func _physics_process(delta):
 
 					traveller.popPhysicsOverride()
 					traveller.apply_central_impulse(travellerDir * travellerSpeed)
+
+				traveller.collision_layer = data["collision_layer"]
+				traveller.collision_mask = data["collision_mask"]
 
 			travellersToRemove.push_front(i)
 
