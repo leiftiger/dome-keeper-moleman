@@ -258,6 +258,10 @@ func _physics_process(delta):
 							newTile.health = oldTileHealth
 							Level.map.setTileDamage(newTile.max_health, -drillDir, tileCoord)
 
+							for x in range(-1, 1):
+								for y in range(-1, 1):
+									Level.map.updateBorderSprite(tileCoord.x + x, tileCoord.y + y)
+
 							startTileCoord = tileCoord
 			else:
 				# Hit an indestructible tile
