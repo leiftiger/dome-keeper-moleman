@@ -557,6 +557,7 @@ keeper59:
     - keeper59.tunnelDetonationDelay = 0.15
     - keeper59.tunnelVacuum = false/h
     - keeper59.tunnelVacuumStrength = 4.0
+    - keeper59.tunnelVacuumPatienceLossPerSec = 0.25/h
     - keeper59.queuedTunnelers = false/h
     - keeper59.queuedTunnelersSplit = false/h
     - keeper59.queuedTunnelersRecursion = false/h

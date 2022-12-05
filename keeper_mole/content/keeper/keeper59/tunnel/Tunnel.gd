@@ -9,6 +9,7 @@ var vacuumMode := false
 var vacuumReverse := false
 var vacuumCarryablesLeft := []
 var vacuumCarryablesRight := []
+var vacuumPatience := {}
 
 var isDetonating := false
 var hasDetonated := false
@@ -274,8 +275,13 @@ func _on_LeftCarryArea_body_entered(carryable):
 
 	vacuumCarryablesLeft.append(carryable)
 
+	vacuumPatience[carryable.get_instance_id()] = 0
+
 func _on_LeftCarryArea_body_exited(carryable):
 	vacuumCarryablesLeft.erase(carryable)
+
+	if carryable.get_instance_id() in vacuumPatience:
+		vacuumPatience.erase(carryable.get_instance_id())
 
 func _on_RightCarryArea_body_entered(carryable):
 	if vacuumCarryablesRight.has(carryable) or not allowObjectToVacuum(carryable):
@@ -283,8 +289,13 @@ func _on_RightCarryArea_body_entered(carryable):
 
 	vacuumCarryablesRight.append(carryable)
 
+	vacuumPatience[carryable.get_instance_id()] = 0
+
 func _on_RightCarryArea_body_exited(carryable):
 	vacuumCarryablesRight.erase(carryable)
+
+	if carryable.get_instance_id() in vacuumPatience:
+		vacuumPatience.erase(carryable.get_instance_id())
 
 func _physics_process(delta):
 
@@ -323,14 +334,18 @@ func _physics_process(delta):
 
 		for carryObj in carryables:
 
+			var id = carryObj.get_instance_id()
+
 			# Avoid vacuuming objects that are in our tunnel, or carried by the keeper
-			if carryObj.get_instance_id() in travellersInTunnel or carryObj.physicsOverrides.size() > 1:
+			if id in travellersInTunnel or carryObj.physicsOverrides.size() > 1:
 				continue
 
 			var diffVec = (entrancePosition - carryObj.global_position)
 
 			var sprite = carryObj.find_node("Sprite")
-			var size = max(sprite.get_rect().size.x, sprite.get_rect().size.y)*0.85
+			var size = (max(sprite.get_rect().size.x, sprite.get_rect().size.y)*0.85) + vacuumPatience[id]
+
+			vacuumPatience[id] += Data.of("keeper59.tunnelVacuumPatienceLossPerSec") * delta
 
 			if diffVec.length() < size:
 				self.enterTunnel(carryObj)
