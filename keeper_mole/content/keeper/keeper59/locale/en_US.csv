@@ -1,5 +1,3 @@
-keeper59.title	Moleman
-keeper59.desc	Digs tunnels in preparation for his vengeance
 upgrades.keeper59.title	Moleman
 upgrades.keeper59.desc	A strange creature that balances throughput and speed.
 upgrades.keeper59movespeed1.title	Move speed
@@ -45,9 +43,9 @@ upgrades.keeper59tunnelvacuum.desc	"Tunnels will hoover up resources close to th
 
 Press and hold the drop button before touching a tunnel to reverse vacuum direction."
 upgrades.keeper59tunnelreducedfriction.title	Reduced friction
-upgrades.keeper59tunnelreducedfriction.desc	"Tunnels receive normal damage when you quickly travel back and forth through them.
+upgrades.keeper59tunnelreducedfriction.desc	"You do less damage to tunnels you use infrequently.
 
-Otherwise, tunnels will last longer if seldomly used."
+Quickly going back and forth through the same tunnel will build up friction, which allows you to negate the damage reduction and destroy tiles as normal."
 upgrades.keeper59tunnelspeed1.title	Tunnel move speed 1
 upgrades.keeper59tunnelspeed1.desc	You move even faster when travelling in tunnels.
 upgrades.keeper59tunnelspeed2.title	Tunnel move speed 2
