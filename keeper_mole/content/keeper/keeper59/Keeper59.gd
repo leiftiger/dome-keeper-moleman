@@ -642,7 +642,11 @@ func touchTunnelTile()->void:
 			else:
 				lastTile = null
 				isTunneling = false
-				tunnel.enterTunnel(self)
+				hasUpdatedTunnelMarkers = false
+
+				# Only allow tunnel entry if not carrying anything
+				if carriedCarryables.size() == 0:
+					tunnel.enterTunnel(self)
 
 			return
 
