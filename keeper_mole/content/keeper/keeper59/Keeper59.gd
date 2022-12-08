@@ -368,6 +368,18 @@ func updateTunnelerTargets(delta):
 
 	if isTunneling and is_instance_valid(lastTile):
 
+		var lastTileCoord = Level.map.getTileCoord(lastTile.global_position) - lastTileDir
+
+		var curTileCoord = Level.map.getTileCoord(self.global_position)
+
+		# No longer in the same position to create the tunnel
+		if (lastTileCoord - curTileCoord).length() > 0.1:
+			lastTile = null
+			isTunneling = false
+			hasUpdatedTunnelMarkers = false
+
+			return
+
 		if curTunnelDistance < Data.of("keeper59.tunnelMinLength"):
 			curTunnelDistance = Data.of("keeper59.tunnelMinLength")
 
@@ -491,6 +503,18 @@ func pickupHoldStopped():
 	
 	if isTunneling and is_instance_valid(lastTile) and hasUpdatedTunnelMarkers:
 		curTunnelerCooldown = Data.of("keeper59.tunnelerCooldownTime")
+
+		var lastTileCoord = Level.map.getTileCoord(lastTile.global_position) - lastTileDir
+
+		var curTileCoord = Level.map.getTileCoord(self.global_position)
+
+		# No longer in the same position to create the tunnel
+		if (lastTileCoord - curTileCoord).length() > 0.1:
+			lastTile = null
+			isTunneling = false
+			hasUpdatedTunnelMarkers = false
+
+			return
 
 		if tileTunnelers.has(lastTile.get_instance_id()):
 			var tileTunneler = tileTunnelers.get(lastTile.get_instance_id())
