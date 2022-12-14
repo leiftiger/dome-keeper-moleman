@@ -109,6 +109,7 @@ prestigefinishnocobalt:
 
 
 domewavemeter:
+  limit: [hostile]
   cost: iron=2
   predecessors: [dome1,dome2,dome3,dome4]
   predecessorsAny: true
@@ -910,14 +911,15 @@ swordStabExplode:
   cost: iron=15
   propertyChanges: 
     - sword.stabExplosive = 1
-    - sword.stabExplosiveDamage = 30
-    - sword.stabCooldown += 1.0
+    - sword.stabExplosiveDamage = 40
+    - sword.stabCooldown += 0.5
   predecessors: [swordExtendLong2]
 swordStabExplodeDamage:
   cost: iron=25
   propertyChanges: 
     - sword.stabExplosive = 2
-    - sword.stabExplosiveDamage = 60
+    - sword.stabExplosiveDamage = 100
+    - sword.stabCooldown += 0.5
   predecessors: [swordStabExplode]
 swordStabShoot:
   cost: iron=20

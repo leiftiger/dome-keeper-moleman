@@ -96,9 +96,9 @@ func beforeStart():
 	$CanvasLayer / PrestigePopup.backgroundHide = $CanvasLayer / ColorRect
 	$CanvasLayer / PrestigePopup.visible = true
 	$CanvasLayer / PrestigePopup.rect_position.y += $CanvasLayer / PrestigePopup.get_viewport_rect().size.y
-	$CanvasLayer / MinerPopup.backgroundHide = $CanvasLayer / ColorRect
-	$CanvasLayer / MinerPopup.visible = true
-	$CanvasLayer / MinerPopup.rect_position.y += $CanvasLayer / MinerPopup.get_viewport_rect().size.y
+	$CanvasLayer / ColonizationPopup.backgroundHide = $CanvasLayer / ColorRect
+	$CanvasLayer / ColonizationPopup.visible = true
+	$CanvasLayer / ColonizationPopup.rect_position.y += $CanvasLayer / ColonizationPopup.get_viewport_rect().size.y
 	$CanvasLayer / ColorRect.visible = true
 	$CanvasLayer / ColorRect.modulate.a = 0.0
 	
@@ -142,6 +142,7 @@ func beforeStart():
 	
 	$Map.setTileData(preload("res://stages/loadout/LoadoutTileData.tscn").instance())
 	$Map.init()
+	
 	
 	updateMap()
 	
@@ -402,7 +403,9 @@ func resetMap():
 	$Map.growTile(Vector2( - 11, 3), 10)
 	$Map.fill(Vector2( - 11, 4))
 	$Map.growTile(Vector2( - 11, 4), 10)
-	updateMap()
+
+	# This is why the resource tile disappears when reset, so let's fix it while we're at it
+	#updateMap()
 
 func clearResources():
 	for r in get_tree().get_nodes_in_group("drops"):
@@ -493,9 +496,6 @@ func setMode(modeId:String):
 	find_node("ModeTextureRect").texture = load("res://content/icons/loadout_" + modeId + ".png")
 	find_node("ModeTextureRect").rect_min_size = find_node("ModeTextureRect").texture.get_size() * 4
 	
-	if modeId == CONST.MODE_MINER:
-		setGadget("orchard")
-	
 	updateStartable()
 
 func setPet(id:String):
@@ -517,7 +517,6 @@ func setSkin(id:String):
 
 func updateStartable():
 	var startable = domeId and gadgetId and modeId and keeperId
-	startable = startable and (modeId != CONST.MODE_MINER or gadgetId == "orchard")
 	find_node("ProceedToSecondStageButton").disabled = not startable
 	
 func _on_DomeButton_pressed():
@@ -527,10 +526,7 @@ func _on_DomeButton_pressed():
 
 func _on_GadgetButton_pressed():
 	var gadgets
-	if modeId == CONST.MODE_MINER:
-		gadgets = ["orchard"]
-	else :
-		gadgets = ["shield", "repellent", "orchard"]
+	gadgets = ["shield", "repellent", "orchard"]
 	$CanvasLayer / ChoicePopup.addOptions("gadget", gadgets, gadgetId)
 	buttonToFocusOnChoicesClosed = find_node("GadgetButton")
 	openChoices()
@@ -542,7 +538,6 @@ func _on_KeeperButton_pressed():
 
 func _on_ModeButton_pressed():
 	$CanvasLayer / ChoicePopup.addOptions("mode", [CONST.MODE_RELICHUNT, CONST.MODE_PRESTIGE], modeId)
-
 	buttonToFocusOnChoicesClosed = find_node("ModeButton")
 	openChoices()
 
@@ -577,7 +572,7 @@ func closeChoices(popupInput):
 	if popupInput.popup.is_connected("choice_made", self, "choiceMade"):
 		popupInput.popup.disconnect("choice_made", self, "choiceMade")
 
-func _on_StartButton_pressed():
+func startRun():
 	Audio.sound("gui_loadout_startrun")
 	var loadout = Loadout.new(domeId, gadgetId, keeperId, modeId)
 	if GameWorld.buildType == CONST.BUILD_TYPE.EXHIBITION:
@@ -586,11 +581,12 @@ func _on_StartButton_pressed():
 	match modeId:
 		CONST.MODE_RELICHUNT:
 			loadout.worldModifiers = $CanvasLayer / RelichuntPopup.getWorldModifiers()
-		CONST.MODE_MINER:
-			pass
 		CONST.MODE_PRESTIGE:
+			if GameWorld.lastGameModeVariation == CONST.MODE_PRESTIGE_MINER:
+				loadout.primaryGadgetId = "orchard"
+		CONST.MODE_COLONIZATION:
 			pass
-			
+	
 	StageManager.startStage("stages/landing/landing", [loadout])
 	find_node("StartButton").disabled = true
 
@@ -626,11 +622,11 @@ func _on_ProceedToSecondStageButton_pressed():
 				GameWorld.pause()
 				Audio.muteSounds()
 			else :
-				_on_StartButton_pressed()
-		CONST.MODE_MINER:
+				startRun()
+		CONST.MODE_COLONIZATION:
 			Audio.sound("gui_select")
 			var popupInput = preload("res://gui/PopupInput.gd").new()
-			popupInput.popup = $CanvasLayer / MinerPopup
+			popupInput.popup = $CanvasLayer / ColonizationPopup
 			popupInput.connect("onStop", self, "closeSecondStagePopup", [popupInput.popup])
 			popupInput.integrate(self)
 			popupInput.popup.call_deferred("moveIn")
