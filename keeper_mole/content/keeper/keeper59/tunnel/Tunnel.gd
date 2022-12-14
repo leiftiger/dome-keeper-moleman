@@ -393,6 +393,10 @@ func _physics_process(delta):
 			travellerSpeed = Data.of("keeper59.tunnelKeeperTravelSpeed")
 			centeringSpeed = Data.of("keeper59.tunnelKeeperTravelCenteringSpeed")
 			travellerDamage = Data.of("keeper59.tunnelKeeperTravelDamage") * (1.0 - Data.of("keeper59.tunnelKeeperTravelDamageReduction"))
+
+			travellerDamage *= (1 + Data.ofOr("keeper.drillbuff", 0))
+			travellerSpeed += Data.ofOr("keeper.speedBuff", 0)
+			centeringSpeed += Data.ofOr("keeper.speedBuff", 0) * 0.1
 		else:
 			travellerSpeed = Data.of("keeper59.tunnelObjectTravelSpeed")
 			centeringSpeed = Data.of("keeper59.tunnelObjectTravelCenteringSpeed")
