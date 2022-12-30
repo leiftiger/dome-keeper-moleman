@@ -612,7 +612,7 @@ func _on_ProceedToSecondStageButton_pressed():
 			GameWorld.pause()
 			Audio.muteSounds()
 		CONST.MODE_PRESTIGE:
-			if GameWorld.isUnlocked(CONST.MODE_PRESTIGE_COBALT) or GameWorld.isUnlocked(CONST.MODE_PRESTIGE_COUNTDOWN):
+			if GameWorld.isUnlocked(CONST.MODE_PRESTIGE_COBALT) or GameWorld.isUnlocked(CONST.MODE_PRESTIGE_COUNTDOWN) or GameWorld.isUnlocked(CONST.MODE_PRESTIGE_MINER):
 				Audio.sound("gui_select")
 				var popupInput = preload("res://gui/PopupInput.gd").new()
 				popupInput.popup = $CanvasLayer / PrestigePopup
