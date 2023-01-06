@@ -188,7 +188,7 @@ dome1damageReduction2:
 dome2:
   slots: [primary, cellar, cellar, prospection, shaft, bubble, cupolaRailOutside, probe]
   propertyChanges: 
-    - dome.maxhealth = 800
+    - dome.maxhealth = 1000
     - dome.damageReduction = 0.0/h
     - dome.baserepair = 0/h
     - dome.healthfractionrepair = 0/h
@@ -879,7 +879,7 @@ swordExtendLong1:
 swordExtendLong2:
   cost: iron=10
   propertyChanges:
-    - sword.stabDamage += 90
+    - sword.stabDamage += 100
     - sword.stabRange += 2000
     - sword.retractspeed += 500
     - sword.stabCooldown += 1.0
@@ -893,7 +893,7 @@ swordStabFast1:
     - sword.retractspeed += 300
     - sword.stabCooldown -= 1.0
     - sword.stabArrowHead += 1
-    - sword.stabDamage += 10
+    - sword.stabDamage += 15
     - sword.extendMove -= 0.25
   predecessors: [sword]
   locks: [swordExtendLong1]
@@ -904,14 +904,14 @@ swordStabFast2:
     - sword.retractspeed += 400
     - sword.stabCooldown -= 1.0
     - sword.stabArrowHead += 1
-    - sword.stabDamage += 20
+    - sword.stabDamage += 30
     - sword.extendMove -= 0.5
   predecessors: [swordStabFast1]
 swordStabExplode:
   cost: iron=15
   propertyChanges: 
     - sword.stabExplosive = 1
-    - sword.stabExplosiveDamage = 40
+    - sword.stabExplosiveDamage = 50
     - sword.stabCooldown += 0.5
   predecessors: [swordExtendLong2]
 swordStabExplodeDamage:
@@ -925,7 +925,7 @@ swordStabShoot:
   cost: iron=20
   propertyChanges: 
     - sword.javelin = true
-    - sword.stabDamage += 40
+    - sword.stabDamage += 50
     - sword.stabArrowHead += 1
   predecessors: [swordStabFast2]
 swordReflection1:
@@ -1792,7 +1792,7 @@ liftorbs:
   propertyChanges: 
     - lift.orbs += 1
   repeatable:
-    - cost.iron += 2
+    - cost.iron += 1
   predecessors: [lift]
 liftspeed1:
   cost: iron=4, water=2
